@@ -1,0 +1,2 @@
+# bm-django
+django migration
