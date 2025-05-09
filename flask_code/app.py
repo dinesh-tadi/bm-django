@@ -14,17 +14,14 @@ import pytz
 
 app = Flask(__name__)
 
-app.config['MYSQL_USER']='root'
-app.config['MYSQL_PASSWORD']='MySQL@d1075'#
-app.config['MYSQL_HOST']='127.0.0.1'#
+
 app.config['MYSQL_DB']='bank'#
 
 app.secret_key="@342$62455asdw"
 
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT']=465
-app.config['MAIL_USERNAME']='g17miniproject@gmail.com'
-app.config['MAIL_PASSWORD']='Myminiprojectpswd17'
+
 app.config['MAIL_USE_TLS']=False
 app.config['MAIL_USE_SSL']=True
 mysql=MySQL(app)
