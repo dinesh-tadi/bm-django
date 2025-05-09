@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reply to Feedback</title>
+    <style>
+        body {
+            margin: 5em 0em 4em 0em;
+            font-family: sans-serif;
+            background: radial-gradient(circle farthest-corner at 10% 20%, rgba(97,186,255,1) 0%, rgba(166,239,253,1) 90.1%) center center no-repeat fixed;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .feedback-details {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        .feedback-details p {
+            margin: 5px 0;
+        }
+        textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            resize: vertical;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .submit-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+        .cancel-btn {
+            background-color: #f44336;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+        }
+        .cancel-btn:hover {
+            background-color: #da190b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Reply to Feedback</h1>
+        
+        {% for feedback in f %}
+        <div class="feedback-details">
+            <p><strong>Feedback ID:</strong> {{ feedback.0 }}</p>
+            <p><strong>Customer ID:</strong> {{ feedback.1 }}</p>
+            <p><strong>Date:</strong> {{ feedback.2 }}</p>
+            <p><strong>Status:</strong> {{ feedback.3 }}</p>
+            <p><strong>Feedback:</strong> {{ feedback.4 }}</p>
+        </div>
+        
+        <form action="{% url 'replied_view' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="lid" value="{{ feedback.0 }}">
+            <div>
+                <label for="reply"><strong>Your Reply:</strong></label>
+                <textarea name="reply" id="reply" required placeholder="Enter your reply here..."></textarea>
+            </div>
+            <div class="button-group">
+                <button type="submit" class="submit-btn">Submit Reply</button>
+                <a href="{% url 'cust_executive' %}" class="cancel-btn">Cancel</a>
+            </div>
+        </form>
+        {% endfor %}
+    </div>
+</body>
+</html> 

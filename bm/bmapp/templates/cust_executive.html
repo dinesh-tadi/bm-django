@@ -10,9 +10,9 @@
     <script src="https://kit.fontawesome.com/c5ad6c7381.js" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function(){
-            $(".h").on('click', function(){
-                var i = this.id;
-                location.href = "{% url 'reply' %}".concat(i);    
+            $(".reply-btn").on('click', function(){
+                var feedbackId = $(this).data('feedback-id');
+                location.href = "{% url 'reply_view' id=0 %}".replace('0', feedbackId);    
             });
         });
     </script>
@@ -97,8 +97,28 @@
         td {
             font-size: 1.1em;
         }
-        .h:hover {
+        .feedback-row:hover {
             background-color: rgba(123, 140, 146, 0.582);
+        }
+        .reply-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .reply-btn:hover {
+            background-color: #45a049;
+        }
+        .status-pending {
+            color: #f39c12;
+            font-weight: bold;
+        }
+        .status-replied {
+            color: #27ae60;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -128,21 +148,31 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Feed_ID</th>
-                        <th>Account_No</th>
-                        <th>Date_applied</th>
-                        <th>Time_applied</th>
-                        <th>Concern</th>
+                        <th>Feedback ID</th>
+                        <th>Customer ID</th>
+                        <th>Date</th>
+                        <th>Feedback</th>
+                        <th>Reply</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for feedback in f %}
-                        <tr class="h" id="{{ feedback.0 }}">
+                        <tr class="feedback-row">
                             <td>{{ feedback.0 }}</td>
                             <td>{{ feedback.1 }}</td>
                             <td>{{ feedback.2 }}</td>
-                            <td>{{ feedback.3 }}</td>
-                            <td>{{ feedback.4 }}</td>
+                            <td class="{% if feedback.4 == 'unresolved' %}status-pending{% else %}status-replied{% endif %}">
+                                {{ feedback.4 }}
+                            </td>
+                            <td>{{ feedback.5 }}</td>
+                            <td>
+                                {% if feedback.4 == 'unresolved' %}
+                                    <button class="reply-btn" data-feedback-id="{{ feedback.0 }}">Reply</button>
+                                {% else %}
+                                    <span class="status-replied">Replied</span>
+                                {% endif %}
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>
