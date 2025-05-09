@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'design.css' %}">
+    <title>add account</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .ph {
+            width: 90%;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .ph input[type="text"],
+        .ph input[type="password"],
+        .ph input[type="phone number"],
+        .ph input[type="file"],
+        .ph select {
+            width: 90%;
+            max-width: 300px;
+        }
+
+        @media screen and (max-width: 600px) {
+            .ph {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body class="sa">
+    <form class="ph" action="{% url 'create_account' %}" method="POST" enctype="multipart/form-data">   
+        {% csrf_token %}
+        <h1>Add a new account in our bank</h1>
+        <input type="text" placeholder="ENTER YOUR NAME" required name="user_name" autocomplete="off">
+        <input type="text" placeholder="NOMINEE NAME" required name="nominee_name" autocomplete="off">
+        <p> Upload your photo:</p>
+        <input type="file" value="upload passphoto" required name="user_photo">
+        <input type="phone number" placeholder="ENTER PHONE NUMBER" required name="phone_number" autocomplete="off"> 
+        <input type="password" placeholder="CREATE PASSWORD" required name="password">
+        <select style="color: black;" required name="acctype">
+            <option selected value="" disabled="">SELECT THE TYPE OF ACCOUNT</option>
+            <option value="Savings_Account">Savings Account</option>
+            <option value="Current_Account">Current Account</option>
+        </select>
+        <input type="submit" value="ADD ACCOUNT"> 
+    </form>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='design.css')}}">
+    <title>loan application form</title>
+    <style>
+        .v{
+            color:black;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body class="sa">
+    <form class="tom" action="/applyloan" method="POST" enctype="multipart/form-data">
+        <h1> fill out the form</h1>
+        <select name="account_number" required>
+            <option value="" selected disabled>--Account No.--</option>
+            {% for a in acc:%}
+                <option value="{{a[1]}}" class="v">{{a[0]}}</option>
+            {% endfor %}
+        </select> 
+        <input type="text" placeholder="acc holder name" name="holder_name" required autocomplete="none">
+        <input type="phone number" placeholder="enter your phone number" name="phone_number" required autocomplete="none">
+        <input type="text" name="amount" required placeholder="Amount" autocomplete="none">
+        <select style="color: black;" required name="loan_type">
+            <option selected value="" disabled="">SELECT THE TYPE OF LOAN</option>
+            <option value="personal">Personal Loan</option>
+            <option value="gold">Gold Loan</option>
+            <option value="education">Education Loan</option>
+        </select>
+        <p> upload your document:</p>
+        <input type="file" placeholder="attach your document" name="documents" required>
+        <input type="submit" value="APPLY NOW">
+    </form>
+</body>
+</html>

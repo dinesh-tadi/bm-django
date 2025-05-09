@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" style="background: radial-gradient( circle farthest-corner at 10% 20%,  rgba(97,186,255,1) 0%, rgba(166,239,253,1) 90.1% ) center center no-repeat fixed">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/c5ad6c7381.js" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            $(".h").on('click', function(){
+            var i = this.id
+            location.href = "/reply/".concat(i);    
+            });
+        })
+    </script>
+    <style>
+        body{
+            margin: 5em 0em 4em 0em;
+            font-family: sans-serif;
+        }
+        .nav{
+            position: fixed;
+            top:0em;
+            right: 0em;
+            left:0em;
+            display: flex;
+            flex-direction: row;
+            padding: 0.45em 0.3em 0.3em 0.3em;
+            color: #fffdfd;
+            background-color: black;
+            font-size: 1.4em;
+            justify-content: space-between;
+        }
+        .left{
+            display: flex;
+            flex-direction: column;
+            padding: 1em 3em 0.5em 0.5em;
+            color:rgb(255, 248, 248);
+            background-color: rgb(0, 0, 0);
+            font-size: 1.2em;
+            width:fit-content;
+            margin-left: 0em;
+            font-family: sans-serif;
+            display: none;
+        }
+        .func{
+            padding: 0.3em 1em 0.3em 0.65em;
+            background-color: rgba(120, 120, 120, 0.679);
+            border-radius: 0.5em;
+            margin: 0.5em 0em;
+            transition: all 250ms;
+        }
+        .func:hover{
+            box-shadow: #ffffff 1px 1px 15px 3px;
+            font-size: 1.21em;
+        }
+        button:hover{
+            box-shadow: 2px 2px 10px 4px rgba(5, 36, 44,0.8);
+        }
+        .bt{
+            font-size: 0.95em;
+            text-decoration: none;
+            border-radius: 2em;
+            padding: 0.3em 0.6em;
+            margin: 0.3em 0.3em;
+            background-color: #FF0000;
+            transition: all 400ms;
+            color: white;
+            font-family: sans-serif;
+        }
+        .bt:hover{
+            box-shadow: #aaaaaa 2px 2px 20px 4px;
+            font-size: 1em;
+            color: rgb(5, 5, 5);
+        }
+        .fa-bars:hover{
+            cursor:pointer;
+            transform: rotateZ(180deg);
+        }
+        
+        .cli{
+            background-color: #ffffff46;
+            padding: 1em 1.5em;
+            width: 22em;
+            height: fit-content;
+            font-size: 1.4em;
+            margin: 1em auto;
+            border-radius: 1em;
+            transition: all 600ms;
+        }
+        .content{
+            padding: 1em 1.5em;
+            width:18em;
+            font-size: 1.2em;
+            height: fit-content;
+            transition: all 600ms;
+        }
+        table {
+          border-collapse: collapse;
+          width: fit-content;
+          font-family: sans-serif;
+          border-spacing: 2em;
+          text-align: center;
+        }
+        
+        th, td {
+          padding: 0.5em 1.3em;
+          text-align: left;
+          border-bottom: 1px solid rgb(31, 29, 29);
+          text-align: center;
+        }
+
+        th{
+            font-size: 1.25em;
+        }
+
+        td{
+            font-size: 1.1em;
+        }
+
+        .h:hover{
+            background-color: rgba(123, 140, 146, 0.582);
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <div style="display: flex; background-color:#559ccf;padding: 0.23em 0.3em 0.3em 0.3em; border-radius: 2em;">
+            <div style="display: flex; justify-content: center; flex-direction: column;"><img src="{{url_for('static',filename='icon.png')}}" alt="" style="height: 1.5em; width: 1.5em;"></div>
+            <div style="display: flex; justify-content: center; flex-direction: column; font-family: sans-serif;">CENTRAL BANK</div>
+        </div>
+        <div style="margin: 0.2em 1em 0em 0em; padding: 0.23em 0.3em 0.3em 0.3em">
+            <a href="/logout"  class="bt" >LOG OUT</a>
+        </div>
+    </div>
+    <div style="display: flex;">
+            <div style="flex-grow: 1;">
+                <i class="fas fa-bars" style="font-size: 2em; margin: 0em 0.31em;transition: all 700ms;"></i>
+                <div class="left">
+                    <div>Hello, {{name}}</div>
+                    <div class="func"><a href="cashierpswd.html" style="color:white;text-decoration:none;">change password</a></div>
+                </div>
+            </div>
+            <div style="flex-grow: 1;">
+                <table>
+                    <thead>
+                        <th>Feed_ID</th>
+                        <th>Account_No</th>
+                        <th>Date_applied</th>
+                        <th>Time_applied</th>
+                        <th>Concern</th>
+                    </thead>
+                    <tbody>
+                        {%for i in f:%}
+                                <tr class="h" id={{i[0]}}>
+                                    <td>{{i[0]}}</td>
+                                    <td>{{i[1]}}</td>
+                                    <td>{{i[2]}}</td>
+                                    <td>{{i[3]}}</td>
+                                    <td>{{i[4]}}</td>
+                                </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+    </div>
+
+    
+    <script>
+        $('.fa-bars').click(function(){
+            $('.left').slideToggle(800)
+            $('.cli').toggleClass("content")
+        })
+    </script>
+</body>
+</html>

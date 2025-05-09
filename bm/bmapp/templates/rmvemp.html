@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'design.css' %}">
+    <title>Remove Employee</title>
+    <link rel="icon" href="{% static 'sahara.png' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(to right, #b92b27, #1565c0);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .inp {
+            width: 90%;
+            max-width: 500px;
+            padding: 40px;
+            background: #3a3838;
+            text-align: center;
+            border-radius: 10px;
+            margin: 20px;
+        }
+        .inp h1 {
+            color: white;
+            text-transform: uppercase;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+        .inp input[type="text"],
+        .inp input[type="password"],
+        .inp select {
+            border: 0;
+            background: none;
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            border: 2px solid #3498db;
+            padding: 14px 10px;
+            width: 80%;
+            outline: none;
+            color: white;
+            border-radius: 24px;
+            transition: 0.25s;
+        }
+        .inp input[type="submit"] {
+            border: 0;
+            background: none;
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            border: 2px solid #3498db;
+            padding: 14px 40px;
+            outline: none;
+            color: white;
+            border-radius: 24px;
+            transition: 0.25s;
+            cursor: pointer;
+        }
+        .inp input[type="submit"]:hover {
+            background: #2ecc71;
+        }
+        .select2-container--default .select2-selection--single {
+            background-color: transparent !important;
+            border: 2px solid #3498db !important;
+            border-radius: 24px !important;
+            height: 45px !important;
+            color: white !important;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: white !important;
+            line-height: 45px !important;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 43px !important;
+        }
+        .select2-dropdown {
+            background-color: #3a3838 !important;
+            border: 2px solid #3498db !important;
+        }
+        .select2-container--default .select2-results__option {
+            color: white !important;
+        }
+        .select2-container--default .select2-results__option--highlighted[aria-selected] {
+            background-color: #3498db !important;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+            var options = {{ emp|safe }};
+            
+            $("#employee_select").select2({
+                placeholder: "Select Employee",
+                data: options,
+                width: '100%'
+            });
+        });    
+    </script>
+</head>
+<body>
+    <div class="inp"> 
+        <form action="{% url 'rmv_emp' %}" method="POST">
+            {% csrf_token %}
+            <h1>Remove Employee</h1>
+            <select name="employee_user_id" id="employee_select" required>
+                <option value=""></option>
+            </select>
+            <input type="password" placeholder="Admin Password" name="admin_privacy_key" required>
+            <input type="submit" value="Remove Employee">
+        </form>
+    </div>
+</body>
+</html>

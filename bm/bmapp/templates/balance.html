@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'design.css' %}">
+    <title>bank balance</title>
+    <style>
+        .v {
+            font-size: 1.2em;
+            color: black;
+        }
+        .den input[type="text"],
+        .den input[type="password"],
+        .den select,
+        .soon input[type="text"],
+        .soon input[type="password"],
+        .soon select {
+            text-transform: none !important;
+        }
+    </style>
+</head>
+<body class="gun">
+    <h1>GET BANK BALANCE OR STATEMENT</h1>
+    <form class="den" action="{% url 'getbalance' %}" method="POST">
+        {% csrf_token %}
+        <h1>bank balance</h1>     
+        <select name="account_number" required>
+            <option value="" selected disabled>--ACCOUNT NO.--</option>
+            {% for account in acc %}
+                <option value="{{ account.1 }}" class="v">{{ account.0 }}</option>
+            {% endfor %}
+        </select> 
+        <input type="password" placeholder="ENTER PASSWORD" name="password" required>
+        <input type="submit" value="CHECK BALANCE"> 
+        {% if bool1 %}
+        <div style="color: rgb(199, 58, 58); font-size: 1.3em;font-family: sans-serif;">Incorrect Password for the Account_No.</div>
+        {% endif %}
+    </form>
+    <form class="soon" method="POST" action="{% url 'getstatement' %}">
+        {% csrf_token %}     
+        <h1>statement</h1>
+        <select name="account_number" required>
+            <option value="" selected disabled>--ACCOUNT NO.--</option>
+            {% for account in acc %}
+                <option value="{{ account.1 }}" class="v">{{ account.0 }}</option>
+            {% endfor %}
+        </select> 
+        <input type="password" placeholder="ENTER PASSWORD" name="password" required>
+        <input type="submit" value="GET STATEMENT"> 
+    </form>
+</body>
+</html>

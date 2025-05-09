@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='design.css')}}">
+    <title>remove employee</title>
+    <link rel="icon" href="{{url_for('static', filename='sahara.png')}}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(document).ready(function(){
+            var opti = '{{emp | tojson }}';
+            opti = JSON.parse(opti)
+            $("#d").select2({
+                placeholder: "Employee_ID",
+                data:opti
+            })
+        })    
+    </script>
+</head>
+<body class="fal">
+    <div class="inp"> 
+        <form action="/rmv_emp" method="POST">
+            <h1> Remove employee </h1>
+            <select name="employee_user_id" id="d" style="color: black;">
+                <option style="color: black;"></option>
+            </select>
+            <input type="password" placeholder="admin password" name="admin_privacy_key">
+            <input type="submit" value="submit">
+        </form>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,150 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Employee</title>
+    <link rel="stylesheet" href="{% static 'design.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'sahara.png' %}">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: linear-gradient(to right, #b92b27, #1565c0);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .box {
+            width: 90%;
+            max-width: 500px;
+            padding: 40px;
+            background: #3a3838;
+            text-align: center;
+            border-radius: 10px;
+            margin: 20px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .box h1 {
+            color: white;
+            text-transform: uppercase;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+        .box label {
+            color: white;
+            display: block;
+            margin: 15px auto 5px;
+            font-size: 0.9em;
+            text-transform: uppercase;
+        }
+        .box input[type="text"],
+        .box input[type="password"],
+        .box input[type="number"],
+        .box input[type="date"],
+        .box select {
+            border: 0;
+            background: none;
+            display: block;
+            margin: 5px auto 15px;
+            text-align: center;
+            border: 2px solid #3498db;
+            padding: 12px 10px;
+            width: 80%;
+            max-width: 300px;
+            outline: none;
+            color: white;
+            border-radius: 24px;
+            transition: 0.25s;
+        }
+        .box select {
+            background-color: #3a3838;
+            cursor: pointer;
+        }
+        .box select option {
+            background-color: #3a3838;
+            color: white;
+            padding: 10px;
+        }
+        .box input[type="text"]:focus,
+        .box input[type="password"]:focus,
+        .box input[type="number"]:focus,
+        .box input[type="date"]:focus,
+        .box select:focus {
+            width: 85%;
+            border-color: #2ecc71;
+        }
+        .box input[type="submit"] {
+            border: 0;
+            background: none;
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            border: 2px solid #3498db;
+            padding: 14px 40px;
+            outline: none;
+            color: white;
+            border-radius: 24px;
+            transition: 0.25s;
+            cursor: pointer;
+        }
+        .box input[type="submit"]:hover {
+            background: #2ecc71;
+        }
+        .error {
+            color: #e74c3c;
+            margin-top: 10px;
+        }
+        /* Custom scrollbar */
+        .box::-webkit-scrollbar {
+            width: 8px;
+        }
+        .box::-webkit-scrollbar-track {
+            background: #3a3838;
+        }
+        .box::-webkit-scrollbar-thumb {
+            background: #3498db;
+            border-radius: 4px;
+        }
+        .box::-webkit-scrollbar-thumb:hover {
+            background: #2ecc71;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>Add Employee</h1>
+        <form method="post" action="{% url 'add_employee' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="text" name="employee_name" placeholder="Employee Name" required>
+            <input type="text" name="branch_name" placeholder="Branch Name" required>
+            <select name="role" required>
+                <option value="">Select Role</option>
+                <option value="CAS">Cashier</option>
+                <option value="BAN">Banker</option>
+                <option value="APR">Application Reviewer</option>
+                <option value="TRN">Transactioner</option>
+                <option value="WIN">Windows Operator</option>
+            </select>
+            <input type="text" name="Title" placeholder="Employee Title" required>
+            <label for="dob">Date of Birth</label>
+            <input type="date" name="DOB" id="dob" required>
+            <label for="doj">Date of Joining</label>
+            <input type="date" name="date_of_join" id="doj" required>
+            <input type="text" name="phone_number" placeholder="Phone Number" required>
+            <input type="text" name="address" placeholder="Address" required>
+            <input type="text" name="email_id" placeholder="Email ID" required>
+            <input type="number" name="salary" placeholder="Salary" required>
+            <input type="submit" value="ADD EMPLOYEE">
+        </form>
+        {% if msg %}
+        <p class="error">{{ msg }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>

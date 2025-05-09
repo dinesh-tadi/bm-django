@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'design.css' %}">
+    <title>Loan Application Form</title>
+    <style>
+        .v {
+            color: black;
+            font-size: 1.2em;
+        }
+        input, select {
+            text-transform: none !important;
+        }
+    </style>
+</head>
+<body class="sa">
+    <form class="tom" action="{% url 'loan_apply' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1>Fill Out the Form</h1>
+        <select name="account_number" required>
+            <option value="" selected disabled>--Account No.--</option>
+            {% for a in acc %}
+                <option value="{{ a.1 }}" class="v">{{ a.0 }}</option>
+            {% endfor %}
+        </select> 
+        <input type="text" placeholder="Account Holder Name" name="holder_name" required autocomplete="off">
+        <input type="tel" placeholder="Enter Your Phone Number" name="phone_number" required autocomplete="off">
+        <input type="number" name="amount" required placeholder="Amount" autocomplete="off">
+        <select style="color: black;" required name="loan_type">
+            <option selected value="" disabled>SELECT THE TYPE OF LOAN</option>
+            <option value="personal">Personal Loan</option>
+            <option value="gold">Gold Loan</option>
+            <option value="education">Education Loan</option>
+        </select>
+        <input type="number" name="duration" required placeholder="Duration in months" autocomplete="off">
+        <p>Upload Your Document:</p>
+        <input type="file" placeholder="Attach Your Document" name="documents" required>
+        <input type="submit" value="APPLY NOW">
+    </form>
+</body>
+</html>

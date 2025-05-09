@@ -1,0 +1,36 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='design.css')}}">
+    <title>admins</title>
+</head>
+<body class="fal">
+    <form action="/add_employee" method="POST">
+        <div class="val">
+            <h1> add new employee</h1>
+            <input type="text" placeholder="enter name" name="employee_name" autocomplete="none">
+            <input type="text" placeholder="enter branch name" name="branch_name" autocomplete="none">
+            <input type="text" placeholder="enter IFSC number" name="IFSC" autocomplete="none">
+            <select name="role" style="color: black;">
+                <option value="CAS">Cashier</option>
+                <option value="BAN">Banker</option>
+                <option value="APR">Application Reveiwer</option>
+                <option value="TRN">Transactioner</option>
+                <option value="WIN">Windows operator</option>
+            </select>
+            <h4>DATE OF BIRTH:</h4>
+            <input type="date" placeholder="enter date of birth" name="DOB" autocomplete="none">
+            <input type="text" placeholder="enter phone number" name="phone_number" autocomplete="none">
+            <input type="text" placeholder="enter address" name="address" autocomplete="none">
+            <input type="text" placeholder="enter email" name="email_id" autocomplete="none">
+            <input type="text" placeholder="enter salary" name="salary" autocomplete="none">
+            <h4>DATE OF JOINING:</h4>
+            <input type="date" placeholder="enter joining date" name="date_of_join" autocomplete="none">
+            <input type="submit" value="submit">
+        </div>
+    </form>  
+</body>
+</html>

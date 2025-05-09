@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='design.css')}}">
+    <title>casher</title>
+</head>
+<body class="bu">
+    <form action="/casher" method="POST">
+        <div class="sun">  
+            <h1> casher's page</h1>  
+            <input type="account number" placeholder=" enter account number" name="account_number" autocomplete="none">
+            <input type="amount" placeholder=" enter  the amount" name="amount" autocomplete="none">
+            <p> choose one:</p>
+            <select style="color:black" name="selected_option">   
+                <option value="deposit">deposit</option>
+                <option value="withdrawl"> withdrawl</option>
+            </select >
+            <input type="password" placeholder=" privacy key" name="password">
+            <input type="submit" value="submit">
+        </div>
+    </form>
+    
+</body>
+</html>

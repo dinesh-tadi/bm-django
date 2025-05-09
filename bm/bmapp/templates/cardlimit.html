@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'design.css' %}">
+    <title>card limit</title>
+    <style>
+        .pos input[type="text"],
+        .pos input[type="password"],
+        .pos select {
+            text-transform: none !important;
+        }
+    </style>
+</head>
+<body class="sa">
+    <form class="pos" method="POST" action="{% url 'card_limit_post' %}">
+        {% csrf_token %}
+        <h1>change your credit card limit</h1>
+        {% if msg %}
+            <h3 style="color: aqua;">{{msg}}</h3>
+        {% endif %}
+        <select name="account_number" required>
+            <option value="" selected disabled>--Account No.--</option>
+            {% for account in acc %}
+                <option value="{{ account.1 }}" style="color: black; font-size: 1.2em;">{{ account.0 }}</option>
+            {% endfor %}
+        </select>
+        <input type="password" placeholder="enter the password" name="password" required>
+        <input type="text" placeholder="change limit" name="newlimit" autocomplete="off" required> 
+        <input type="submit" value="SUBMIT">
+    </form>
+</body>
+</html>

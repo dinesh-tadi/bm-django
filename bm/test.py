@@ -31,6 +31,10 @@ try:
     result = cursor.fetchone()
     print("Current Time:", result)
 
+    cursor.execute("SELECT tablename FROM pg_tables WHERE schemaname='public';")
+    result = cursor.fetchall()
+    print("Tables:", result)
+
     # Close the cursor and connection
     cursor.close()
     connection.close()

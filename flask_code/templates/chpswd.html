@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>changepassword</title>
+    <style>
+    .flex-container{
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        flex-direction: column;
+        background-image: linear-gradient(to right, #ffd89b, #19547b);
+        
+    }
+    div{
+        width:500px;
+        height:auto;
+        max-width: fit-content;
+        height:auto;
+        margin-top: 90px;
+        text-align: center;
+        border-style: solid;
+        background-color: #19547b;
+        border-radius: 20px;
+        border-color:aqua;
+        padding:20px;
+    }
+    input{
+        padding:10px;
+        margin:20px;
+        border-style:solid;
+        border-radius: 20px;
+        border-color:aqua;
+        outline: 0;
+        box-shadow: 0 0 8px snow;
+        width:280px;
+    }
+    input:focus{   width:350px; border-color:#ffd89b;}
+    input[type="submit"]{
+        width:200px;
+        margin-left:30px;
+    } 
+    input[type="submit"]:hover{  background-color:#5ace80; color:#19547b;}
+h1{   text-align:center; text-transform:uppercase; color:white;}
+
+    </style>
+</head>
+<body class="flex-container">
+    <div>
+        <form action="/ch_pswd" method="POST">
+            <h1> change your password here</h1>
+            <input type="text" name="employee_id" placeholder="EMPLOYEE ID" autocomplete="none"><br>
+            <input type="password" name="oldpassword"  placeholder="OLD PASSWORD"><br>
+            <input type="password" name="newpassword"  placeholder="NEW PASSWORD"><br>
+            <input type="submit" value="SUBMIT"> 
+        </form>
+    </div>
+</body>
+</html>

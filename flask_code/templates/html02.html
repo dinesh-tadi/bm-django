@@ -1,0 +1,104 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title> 
+    <style>  
+    body{
+    margin: 0;  
+    padding: 0;
+    font-family: sans-serif;
+    background: linear-gradient(to right, #b92b27, #1565c0)
+}
+.box{ 
+    width: 500px;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background : #3a3838;
+    text-align: center;
+}  
+.box h1{ 
+   color:white; 
+   text-transform: uppercase;
+   font-weight:500;
+} 
+.box input[type="file"],.box input[type="number"]{ 
+border:0;
+background:none;
+display:block; 
+margin: 20px auto;
+text-align: center; 
+border : 2px solid #3498db;
+padding: 14px 10px ;
+width: 300px;
+outline:none;
+color:white;
+ border-radius: 24px;
+ transition: 0.25s;
+} 
+.box input[type="file"]:focus,.box input[type="number"]:focus{ 
+  width:280px;
+  border-color: #2ecc71;
+} 
+.box input[type="submit"]{  
+  border:0;
+background:none;
+display:block;  
+margin: 20px auto;
+text-align: center; 
+border : 2px solid #3498db;
+padding: 14px 40px ;
+outline:none;
+color:white;
+ border-radius: 24px;
+ transition: 0.25s;
+}
+.box input[type="submit"]:hover{ 
+  background-color:#2ecc71;
+}  
+.same{ border:0;
+background:none;
+display:block;  
+margin: 20px auto;
+text-align: center;  
+border : 2px solid #3498db;
+outline:none; 
+border-radius: 24px;
+width:300px; 
+height: 100px;
+color:white;
+ transition: 0.25s;
+ opacity: 1;
+} 
+.same:focus{  
+  width:350px; 
+  border-color: #2ecc71;
+} 
+.letter{ font-family:"alfa slab one"; 
+text-transform: uppercase; 
+color:#62b122}
+ 
+    </style>
+</head>
+<body>
+  <form  class="box" method="POST" action="/otpconfirm" enctype="multipart/form-data" name="MyForm">
+    <input type="text" value='{{username}}' name="username" style="display: none;">
+    <input type="text" value='{{email_id}}' name="email_id" style="display: none;">
+    <input type="text" value='{{phone}}' name="phone" style="display: none;">
+    <input type="text" value='{{address_info}}' name="address_info" style="display: none;">
+    <input type="text" value='{{PAN}}' name="PAN" style="display: none;">
+    <input type="text" value='{{DOB}}' name="DOB" style="display: none;">
+    <input type="text" value='{{emergency_number}}' name="emergency_number" style="display: none;">
+    <input type="text" value='{{occupation}}' name="occupation" style="display: none;">
+    <input type="text" value='{{income}}' name="income" style="display: none;">
+    <input type="text" value='{{Pswd}}' name="Pswd" style="display: none;">
+    <h1>otp confirmation </h1> 
+    <input autocomplete="off" type="text" class="same" name="otp" cols=""placeholder="please enter otp">
+    <input type="submit">
+</form>
+</body>
+</html>

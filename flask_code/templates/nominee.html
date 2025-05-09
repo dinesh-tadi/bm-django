@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fixed Deposit</title>
+    <style media="screen">
+      .flex-container {
+        display: flex;
+        justify-content:center;
+        align-items:center;
+        flex-direction:column;
+        font-family:Arial;
+        background-image: linear-gradient(to right, #F9D5A7, #A2D2FF);
+
+      }
+
+      div{
+        height:400px;
+        width:400px;
+        margin-top:200px;
+        text-align: center;
+      }
+     input{
+       width:300px;
+       border-radius:20px;
+       padding:10px;
+       margin-bottom:20px;
+       margin-top:20px;
+       border: 2px solid #3D56B2;
+       outline:none;
+
+     }
+     input:focus{
+      width:330px; 
+      box-shadow: 0 0 5px #3D56B2;
+     }
+
+
+     .son{
+       width:200px;
+     }
+     .son:hover{ width:220px;
+    border-color:#3D56B2;
+  background-color:#62ce98;}
+     h1,p{
+       color:blue;
+       text-transform:uppercase;
+       font-weight:bold;
+     }
+    </style>
+  </head>
+  <body class="flex-container" >
+    <div>
+      <h1>Welcome to the Nominee changing</h1>
+
+      <form  action="/changenominee" method="POST">
+        <input type="text" placeholder="Account.No" required="required" name="account_number" autocomplete="none"><br>
+        <input type="text" placeholder="AccountHolderName" required="required" name="holder_name" autocomplete="none"><br>
+        <input type="text" placeholder="Change the Nominee to" name="new_nominee" autocomplete="none">
+        <input class="son" type="submit" placeholder="submit">
+      </form>
+  </div>
+  </body>
+</html>

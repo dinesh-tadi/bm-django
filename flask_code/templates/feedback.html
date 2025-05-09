@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='design.css')}}">
+    <title>feedback</title>
+</head>
+<body class="feed">
+    <form action="/cust_feedback" method="POST">
+        <div class="back">
+            <h1>For Account</h1>
+            <select name="acc">
+                <option value={{acc[0][1]}} selected hidden>{{acc[0][1]}}</option>
+                {% for i in acc%}
+                    <option value={{i[1]}} style="color: black;">{{i[0]}}</option>
+                {% endfor %}
+            </select>
+            <h1> Enter your concern here</h1>
+            <textarea  cols=""placeholder="type your problem" rows="" name="comment" autocomplete="none"></textarea>  
+            <input type="submit" value="submit">
+        </div>
+    </form>
+</body>
+</html>

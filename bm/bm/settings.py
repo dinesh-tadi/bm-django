@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 
+print("USING THIS SETTINGS FILE")
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +27,7 @@ SECRET_KEY = "django-insecure-8(^660k*c7$sahw6!8b2^50zk(0!61b_*_%je+9ex0(#4j!2*0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']  # Only for development!
 
 
 # Application definition
@@ -37,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "bmapp",
 ]
 
 MIDDLEWARE = [
@@ -122,7 +125,25 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+# Add this setting to tell Django where to find static files
+STATICFILES_DIRS = [
+    BASE_DIR / "static",  # Points to the static folder at project root
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Media files (Uploaded files)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = 'g17miniproject@gmail.com'  # Your email
+EMAIL_HOST_PASSWORD = 'fvuzxzzvkyfstfdp'   # Your email password
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

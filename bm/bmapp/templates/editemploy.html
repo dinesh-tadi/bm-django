@@ -1,0 +1,164 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'design.css' %}">
+    <title>Edit Employee</title>
+    <link rel="icon" href="{% static 'sahara.png' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <style>
+        html, body {
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .center-wrapper {
+            min-height: 100vh;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            background: linear-gradient(to right, #b92b27, #1565c0);
+        }
+        form {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .val {
+            margin-top: -20vh;
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 40px;
+            background: #3a3838;
+            text-align: center;
+            border-radius: 10px;
+        }
+        .val h1 {
+            color: white;
+            text-transform: uppercase;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+        .val input[type="text"],
+        .val select {
+            border: 0;
+            background: none;
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            border: 2px solid #3498db;
+            padding: 14px 10px;
+            width: 80%;
+            outline: none;
+            color: white;
+            border-radius: 24px;
+            transition: 0.25s;
+        }
+        .val input[type="submit"] {
+            border: 0;
+            background: none;
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            border: 2px solid #3498db;
+            padding: 14px 40px;
+            outline: none;
+            color: white;
+            border-radius: 24px;
+            transition: 0.25s;
+            cursor: pointer;
+        }
+        .val input[type="submit"]:hover {
+            background: #2ecc71;
+        }
+        .select2-container--default .select2-selection--single {
+            background-color: transparent !important;
+            border: 2px solid #3498db !important;
+            border-radius: 24px !important;
+            height: 45px !important;
+            color: white !important;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: white !important;
+            line-height: 45px !important;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 43px !important;
+        }
+        .select2-dropdown {
+            background-color: #3a3838 !important;
+            border: 2px solid #3498db !important;
+        }
+        .select2-container--default .select2-results__option {
+            color: white !important;
+        }
+        .select2-container--default .select2-results__option--highlighted[aria-selected] {
+            background-color: #3498db !important;
+        }
+    </style>
+    <script type="text/javascript">
+        var opti = JSON.parse('{{ emp|escapejs }}');
+    </script>
+    {{ l1|json_script:"l1-data" }}
+    {{ l2|json_script:"l2-data" }}
+    {{ l3|json_script:"l3-data" }}
+    {{ l4|json_script:"l4-data" }}
+    {{ l5|json_script:"l5-data" }}
+    {{ l6|json_script:"l6-data" }}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#d").select2({
+                placeholder: "Select Employee",
+                data: opti,
+                width: '100%'
+            });
+            var o1 = JSON.parse(document.getElementById('l1-data').textContent);
+            var o2 = JSON.parse(document.getElementById('l2-data').textContent);
+            var o3 = JSON.parse(document.getElementById('l3-data').textContent);
+            var o4 = JSON.parse(document.getElementById('l4-data').textContent);
+            var o5 = JSON.parse(document.getElementById('l5-data').textContent);
+            var o6 = JSON.parse(document.getElementById('l6-data').textContent);
+            $('#d').on('select2:select', function (e) {
+                var i1 = parseInt(e.params.data.num);
+                $('#n').val(o1[i1]);
+                $('#i').val(o2[i1]);
+                $('#p').val(o3[i1]);
+                $('#a').val(o4[i1]);
+                $('#e').val(o5[i1]);
+                $('#s').val(o6[i1]);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="center-wrapper">
+        <form action="{% url 'edit_employee' %}" method="POST">
+            {% csrf_token %}
+            <div class="val">
+                <h1>Edit Employee</h1>
+                <select name="employee_id" id="d" required>
+                    <option></option>
+                </select>
+                <input type="text" placeholder="Name" name="employee_name" id="n" required>
+                <input type="text" placeholder="Enter IFSC number" name="IFSC" id="i" required>
+                <input type="text" placeholder="Enter phone number" name="phone_number" id="p" required>
+                <input type="text" placeholder="Enter address" name="address" id="a" required>
+                <input type="text" placeholder="Enter email" name="email_id" id="e" required>
+                <input type="text" placeholder="Enter salary" name="salary" id="s" required>
+                <input type="submit" value="Update Employee">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

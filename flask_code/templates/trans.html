@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='design.css')}}"> 
+    <title>Document</title>
+</head>
+<body class="sa">
+    <form class="tr" method="POST" action="\transac">
+        <h1>Transaction page</h1>
+        <p> From</p>
+        <select name="from_account_number" required>
+            <option value="" selected disabled>--Account No.--</option>
+            {% for i in acc%}
+                <option value={{i[1]}} style="color: black; font-size: 1.2em;">{{i[0]}}</option>
+            {% endfor %}
+        </select>
+        <p>To</p>
+        <input type="text" placeholder="acc number"required name="to_account_number" autocomplete="none">
+        <input type="number" placeholder="enter the amount"required name="amount" autocomplete="none">
+        <input type="password" placeholder="enter password"required name="password">
+        <select style="color:black" name="whichbank" required>
+            <option selected value="" disabled="">SELECT TRANSACTION TYPE</option>
+            <option value="1"> to same bank</option>
+            <option value="2">other bank</option> 
+        </select>
+        <input type="submit" value="pay">
+    </form>
+</body>
+</html>

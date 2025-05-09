@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fixed Deposit</title>
+  </head>
+  <body class="flex-container" >
+    <style media="screen">
+      .flex-container{
+        display: flex;
+        justify-content:center;
+        align-items:center;
+        flex-direction:column;
+        font-family:Arial;
+        background-image: linear-gradient(to right, #193498, #C37B89);
+
+      }
+
+      div{
+        height:400px;
+        width:400px;
+        margin-top:200px;
+        text-align:center;
+      }
+     input{
+       width:300px;
+       border-radius:20px;
+       padding:10px;
+       margin-bottom:20px;
+       margin-top:20px;
+       border-color:rgb(240, 93, 105);
+       text-align: center;
+       color:white;
+     }
+     INPUT:focus{   width:330px; border-color:black;
+             box-shadow: 0px 50px 10px 0 #0e0f0f inset ,0 10px  50px #19191a,      
+              0px 50px 5px 0 #0a0a0a inset ,0 5px  50px #161818;
+                text-shadow: 0px 50px 5px 0 #191a19,0px 50px 5px 0 #0f0f0f;
+                }
+
+     .son{
+       width:200px;
+       margin:auto;
+       display:inline;
+       background-color:#eea175;
+     }
+     .son:hover{ background-color: rgb(245, 88, 40);
+    width:180px;}
+     h1,p{
+       color:rgb(0, 255, 221);
+     }
+    </style>
+    <div>
+      <h1>Welcome to the bank</h1>
+      <p>Rate of Interset for Fixed Deposit:6.25%</p>
+      <form  action="/fixed_deposit" method="post">
+        <input type="text" placeholder="Account.No" required name="account_number"><br>
+        <input type="text" placeholder="AccountHolderName" required name="holder_name"><br>
+        <input type="number" placeholder="value in rupees Depositing" name="amount">
+        <input type="year" placeholder="duration of year" name="duration">
+        <input class="son" type="submit" value="submit">
+      </form>
+    </div>
+  </body>
+</html>

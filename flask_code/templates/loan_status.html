@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses</title>
+    <style>
+        table {
+          border-collapse: collapse;
+          width: 100%;
+          font-family: sans-serif;
+          border-spacing: 2em;
+          text-align: center;
+        }
+        
+        th, td {
+          padding: 0.3em 1.2em;
+          text-align: left;
+          border-bottom: 1px solid rgb(31, 29, 29);
+          text-align: center;
+        }
+
+        th{
+            font-size: 1.15em;
+        }
+
+        td{
+            font-size: 1em;
+        }
+
+        .h:hover{
+            background-color: rgba(218, 171, 165, 0.562);
+        }
+        </style>
+</head>
+<body style="background-color: #0093E9; background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);">
+    <div style="margin: 1em auto; width: fit-content; background-color: rgba(255, 248, 220, 0.609); border-radius: 1em; padding: 1.5em 2em;">
+        <div style="margin:1em auto; width:fit-content; font-size: 1.6em; color:rgb(8, 53, 138)">
+            Loans Applications:
+        </div>
+        <table>
+            <thead>
+            <tr>
+                <th>Loan_ID</th>
+                <th>Amount</th>
+                <th>Loan_Type</th>
+                <th>Loan_Interest</th>
+                <th>Date_applied</th>
+                <th>Status</th>
+                <th>Reason</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for i in l[1]:%}
+                <tr class="h">
+                    <td>{{i[0]}}</td>
+                    <td>{{i[1]}}</td>
+                    <td>{{i[2]}}</td>
+                    <td>{{i[3]}}</td>
+                    <td>{{i[4]}}</td>
+                    <td>{{i[6]}}</td>
+                    <td>{{i[5]}}</td>
+                </tr>
+            {% endfor %} 
+            </tbody> 
+        </table>
+    </div>  
+    <div style="margin: 1em auto; width: fit-content; background-color: rgba(255, 248, 220, 0.609); border-radius: 1em; padding: 1.5em 2em;">
+        <div style="margin:1em auto; width:fit-content; font-size: 1.6em; color:rgb(8, 53, 138)">
+            Active Loans:
+        </div>
+        <table>
+            <thead>
+            <tr>
+                <th>Loan_ID</th>
+                <th>Loan_amount</th>
+                <th>Amount_Remain</th>
+                <th>EMI</th>
+                <th>Loan_Interest</th>
+                <th>Last Paid</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for i in l[0]:%}
+                <tr class="h">
+                    <td>{{i[0]}}</td>
+                    <td>{{i[1]}}</td>
+                    <td>{{i[2]}}</td>
+                    <td>{{i[3]}}</td>
+                    <td>{{i[4]}}</td>
+                    <td>{{i[5]}}</td>
+                </tr>
+            {% endfor %} 
+            </tbody> 
+        </table>
+    </div>  
+</body>
+</html>

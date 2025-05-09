@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'design.css' %}">
+    <title>Login</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+
+        .msg {
+            background-color: rgba(255, 255, 255, 0.472);
+            color: rgb(184, 219, 55);
+            font-family: sans-serif;
+            font-size: 1.4em;
+            width: fit-content;
+            margin: 2em auto 0.5em auto;
+            border-radius: 1em;
+            padding: 0.5em 1em;
+            word-wrap: break-word;
+            max-width: 90%;
+        }
+
+        .sang input[type="text"],
+        .sang input[type="password"] {
+            text-transform: none !important;
+        }
+
+        @media screen and (max-width: 600px) {
+            .sang {
+                width: 90% !important;
+                padding: 20px !important;
+                transform: translate(-50%, -35%) !important;
+            }
+            .sang input[type="text"],
+            .sang input[type="password"] {
+                width: 80% !important;
+            }
+            .sang input[type="text"]:focus,
+            .sang input[type="password"]:focus {
+                width: 85% !important;
+            }
+        }
+    </style>
+</head>
+<body class="bang">
+    {% if bacc %}
+        <div class="msg">User_ID not found!</div>
+    {% endif %}
+    {% if bpass %}
+        <div class="msg">Incorrect password! Please re-enter.</div>
+    {% endif %}
+    {% if bfree %}
+        <div class="msg">You are no longer authorized!, kindly contact admin for further support.</div>
+    {% endif %}
+    <form class="sang" method="POST" action="{% url 'logindata' %}">
+        {% csrf_token %}
+        <h1>app login page</h1>
+        <input type="text" placeholder="USER-ID" name="user_id" autocomplete="off" required> 
+        <input type="password" placeholder="Password" name="password" required> 
+        <input type="submit" value="LOGIN">
+        <p style="color:white;">Don't have account?</p>
+        <a class="bottom" href="/register">Sign Up here</a>
+    </form>
+</body>
+</html> 

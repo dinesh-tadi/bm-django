@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'design.css' %}">
+    <title>Account Balance</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background: linear-gradient(to right, #b92b27, #1565c0);
+        }
+        .box {
+            width: 500px;
+            padding: 40px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            background: #3a3838;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+        }
+        .box h1 {
+            color: white;
+            text-transform: uppercase;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+        .balance-amount {
+            color: #2ecc71;
+            font-size: 2em;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+        .back-button:hover {
+            background: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>Your Balance is:</h1>
+        <div class="balance-amount">₹{{ bal }}</div>
+        <a href="{% url 'balance' %}" class="back-button">Back to Balance</a>
+    </div>
+</body>
+</html>

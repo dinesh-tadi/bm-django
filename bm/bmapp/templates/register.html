@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'design.css' %}">
+    <title>register</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .yuv {
+            width: 90%;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .yuv input {
+            width: 90%;
+            max-width: 300px;
+            text-transform: none !important;
+        }
+
+        .dob-label {
+            color: #fff;
+            margin: 15px 0 5px;
+            font-size: 1em;
+            font-weight: normal;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .yuv input[type="date"] {
+            background: none;
+            border: 2px solid #3498db;
+            padding: 14px 10px;
+            width: 90%;
+            max-width: 100px;
+            color: white;
+            border-radius: 24px;
+            transition: 0.25s;
+            font-family: inherit;
+        }
+
+        .yuv input[type="date"]:focus {
+            width: 100px;
+            border-color: #2ecc71;
+        }
+
+        /* Style the date picker calendar icon */
+        .yuv input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
+            opacity: 0.8;
+        }
+
+        @media screen and (max-width: 600px) {
+            .yuv {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body class="em">
+    <form style="height: fit-content;" action="{% url 'register_submit' %}" method="POST">
+        {% csrf_token %}
+        <div class="yuv">  
+            <h1>Sign Up as new customer</h1>
+            <input type="text" placeholder="Enter your name" required name="username" autocomplete="off">
+            <input type="text" placeholder="Enter your email" required name="email_id" autocomplete="off">
+            <input type="text" placeholder="Enter your phone number" required name="phone_number" autocomplete="off">
+            <input type="text" placeholder="Enter your address" required name="address_info" autocomplete="off">
+            <label class="dob-label">Date of Birth</label>
+            <input type="date" required name="DOB">
+            <input type="text" placeholder="PAN card number" required name="PAN">
+            <input type="text" placeholder="Enter your emergency contact" name="emergency_number" autocomplete="off">
+            <input type="text" placeholder="Enter your occupation" required name="occupation" autocomplete="off">
+            <input type="text" placeholder="Enter your income" name="income" autocomplete="off">
+            <input type="password" placeholder="Create password" required name="password">  
+            <input type="password" placeholder="Confirm password" required name="password_verif">
+            <input type="submit" value="SUBMIT">    
+        </div>
+    </form>
+</body>
+</html>

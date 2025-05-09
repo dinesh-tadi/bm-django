@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review</title>
+    <style>
+        body{
+            background-image: linear-gradient(to right,#ffd89b , #19547b);
+            background-size: cover;
+            background-position: center;
+        }
+        table {
+          border-collapse: collapse;
+          width: fit-content;
+          font-family: sans-serif;
+          border-spacing: 2em;
+          text-align: center;
+        }
+        
+        th, td {
+          padding: 0.5em 1.3em;
+          text-align: left;
+          border-bottom: 1px solid rgb(31, 29, 29);
+          text-align: center;
+        }
+
+        th{
+            font-size: 1.25em;
+        }
+
+        td{
+            font-size: 1.1em;
+        }
+
+        .h:hover{
+            background-color: rgba(123, 140, 146, 0.582);
+        }
+        input{
+            display: none;
+        }
+        button{
+            padding: 0.5em 0.7em;
+            font-size: 1.2em;
+            width:8em;
+            border-radius: 2em;
+            border: 0px;
+            margin: auto 1em;
+            font-family: sans-serif;
+            transition: all 300ms;
+        }
+        button:hover{
+            box-shadow: 2px 2px 10px 2px black ;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div style="width: fit-content;margin:5em auto; background-color: rgba(255, 248, 220, 0.527);border-radius: 0.7em;">
+        <table>
+            <thead>
+                <th>Feed_ID</th>
+                <th>Account_No</th>
+                <th>Date_applied</th>
+                <th>Time_applied</th>
+                <th>Concern</th>
+            </thead>
+            <tbody>
+                {%for i in f:%}
+                        <tr class="h" id={{i[0]}}>
+                            <td>{{i[0]}}</td>
+                            <td>{{i[1]}}</td>
+                            <td>{{i[2]}}</td>
+                            <td>{{i[3]}}</td>
+                            <td>{{i[4]}}</td>
+                        </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div style="display: flex; width:fit-content; margin: auto;">
+        <div>
+            <form action="/replied" method="post">
+                <input type="text" name="lid" value="{{f[0][0]}}">
+                <div>
+                    <textarea name="reply" placeholder="Reply" style="border: none; width:16em; height:8em; font-size:1.4em; border-radius:0.5em; padding:0.5em;font-family: sans-serif;"></textarea>
+                </div>
+                <br><br><br><button type="submit" style="background-color: cornflowerblue;color: white; margin-left: 6em;">Send</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

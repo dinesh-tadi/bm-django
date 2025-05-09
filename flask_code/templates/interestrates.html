@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='design.css')}}">
+    <title>update rate of interest</title>
+</head>
+<body class="fal">
+    <div class="inp">
+        <form action="/interest_rates" method="POST">   
+            <h1> update rate of interest  </h1>
+            <h4> gold interest rate </h4>
+            <input type="text" value="{{interest['gold']}}" name="gold_interest_rate"> 
+            <h4>   educational interest rate </h4> 
+            <input type="text" value="{{interest['education']}}" name="edu_interest_rate"> 
+            <h4> personal loan  interest rate </h4> 
+            <input type="text" value="{{interest['personal']}}" name="personal_loan_interest_rate">
+            <h4> fixed deposit rate of interest </h4> 
+            <input type="text" value="{{interest['FD']}}" name="FD_interest_rate">
+            <input type="submit" value="update">
+        </form>     
+    </div>
+</body>
+</html>

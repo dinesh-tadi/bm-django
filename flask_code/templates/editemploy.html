@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='design.css')}}">
+    <title>Admins</title>
+    <link rel="icon" href="{{url_for('static', filename='sahara.png')}}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(document).ready(function(){
+            var opti = '{{emp | tojson }}';
+            opti = JSON.parse(opti)
+            $("#d").select2({
+                placeholder: "Employee_ID",
+                data:opti
+            })
+            $('#d').on('select2:select', function (e) {
+                i1 = parseInt(e.params.data.num)
+                var o1 = '{{l1 | tojson }}';
+                o1 = JSON.parse(o1)
+                var o2 = '{{l2 | tojson }}';
+                o2 = JSON.parse(o2)   
+                var o3 = '{{l3 | tojson }}';
+                o3 = JSON.parse(o3)
+                var o4 = '{{l4 | tojson }}';
+                o4 = JSON.parse(o4)
+                var o5 = '{{l5 | tojson }}';
+                o5 = JSON.parse(o5)
+                var o6 = '{{l6 | tojson }}';
+                o6 = JSON.parse(o6)
+                $('#n').val(o1[i1])
+                $('#i').val(o2[i1])
+                $('#p').val(o3[i1])
+                $('#a').val(o4[i1])
+                $('#e').val(o5[i1])
+                $('#s').val(o6[i1])
+        }) 
+        }) 
+          
+    </script>
+</head>
+<body class="fal">
+    <form action="/edit_employee" method="POST">
+        <div class="val">
+            <h1> edit employee</h1>
+            <select name="employee_id" id="d">
+                <option></option>
+            </select>
+            <input type="text" placeholder="name" name="employee_name" id="n" style="color: black;">
+            <input type="text" placeholder="enter IFSC number" name="IFSC" id="i" style="color: black;">
+            <input type="text" placeholder="enter phone number" name="phone_number" id="p" style="color: black;">
+            <input type="text" placeholder="enter address" name="address" id="a" style="color: black;">
+            <input type="text" placeholder="enter email" name="email_id" id="e" style="color: black;">
+            <input type="text" placeholder="enter salary" name="salary" id="s" style="color: black;">
+            <input type="submit" value="submit">
+        </div>
+    </form>
+</body>
+</html>
