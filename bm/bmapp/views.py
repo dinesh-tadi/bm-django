@@ -9,6 +9,9 @@ from datetime import date, datetime
 from django.http import HttpResponse
 import json
 from django.db import transaction
+from django.contrib import messages
+from django.utils import timezone
+from .models import Customertable, Accounttable, Feedbacktable
 
 interest = {
     "gold": "10%",
@@ -275,8 +278,71 @@ def loan_apply(request):
     ac = [[str(a[0])[0:3] + "xxxx" + str(a[0])[-3:], a[0]] for a in accounts]
     return render(request, 'applyloan.html', {'acc': ac})
 
-def feedback(request):
-    return render(request, 'feedback.html')
+def cust_feedback(request):
+    if request.method == 'POST':
+        try:
+            acc = request.POST.get('acc')
+            comment = request.POST.get('comment')
+            
+            if not acc or not comment:
+                messages.error(request, 'Please fill in all fields')
+                return redirect('cust_feedback')
+            
+            # Get the customer's IFSC code and customerID
+            with connection.cursor() as cursor:
+                cursor.execute("""
+                    SELECT cd."IFSC_code", cd."customerID" 
+                    FROM "customerTable" cd 
+                    JOIN "accountTable" ad ON cd."customerID" = ad."customerID" 
+                    WHERE ad."accountNo" = %s
+                """, [acc])
+                result = cursor.fetchone()
+                
+                if not result:
+                    messages.error(request, 'Account not found')
+                    return redirect('cust_feedback')
+                    
+                ifsc_code, customer_id = result
+                
+                # Insert into feedbackTable
+                cursor.execute("""
+                    INSERT INTO "feedbackTable" 
+                    ("createdAt", "status", "feedback", "IFSC_code", "customerID", "feedbackID") 
+                    VALUES (%s, %s, %s, %s, %s, gen_random_uuid())
+                """, [
+                    timezone.now(),
+                    'unresolved',
+                    comment,
+                    ifsc_code,
+                    customer_id
+                ])
+            
+            messages.success(request, 'Feedback submitted successfully!')
+            return render(request, 'success.html')
+            
+        except Exception as e:
+            messages.error(request, f'Error submitting feedback: {str(e)}')
+            return redirect('cust_feedback')
+    
+    # GET request - show the form
+    try:
+        # Get account details for the dropdown
+        with connection.cursor() as cursor:
+            cursor.execute("""
+                SELECT "accountNo"
+                FROM "accountTable" 
+                ORDER BY "accountNo"
+            """)
+            accounts = cursor.fetchall()
+            print(f"Found accounts: {accounts}")  # Debug log
+        
+        context = {'acc': accounts}
+        return render(request, 'feedback.html', context)
+        
+    except Exception as e:
+        print(f"Error loading feedback form: {str(e)}")  # Debug log
+        messages.error(request, f'Error loading feedback form: {str(e)}')
+        return redirect('dashboard')
 
 def contact(request):
     return render(request, 'contact.html')

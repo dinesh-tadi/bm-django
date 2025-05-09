@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'design.css' %}">
+    <title>Feedback</title>
+</head>
+<body class="feed">
+    <form action="{% url 'cust_feedback' %}" method="POST">
+        {% csrf_token %}
+        <div class="back">
+            <h1>For Account</h1>
+            <select name="acc">
+                <option value="{{ acc.0.1 }}" selected hidden>{{ acc.0.1 }}</option>
+                {% for account in acc %}
+                    <option value="{{ account.0 }}" style="color: black;">{{ account.0 }}</option>
+                {% endfor %}
+            </select>
+            <h1>Enter your concern here</h1>
+            <textarea cols="" placeholder="Type your problem" rows="" name="comment" autocomplete="off"></textarea>  
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+</body>
+</html>

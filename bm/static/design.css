@@ -564,31 +564,43 @@ border-radius:20px;}
     text-transform: uppercase;
   color:#11fcfc;}
   .kal{     
-  width:100%;
-  height:100vh;
-  background-image: url("backgr.png");
-  background-size: cover;
-  background-position:center;}
-  .yours{ width: 500px;
-    padding: 20px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    background : #f2f3f0;
-    text-align: center;
-    border-radius: 24px; 
-    opacity: 0.95;        
-  }
-  .yours h1{   text-transform: uppercase;
-  color:black;
-font-family: arial,sans-serif;
-font-weight: 700;}
-
-.yours text,.yours last{ font-weight:200px;
-font-size: 20px;
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),url("background.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.yours h2{ text-transform: uppercase}
+
+.yours{ 
+    width: 500px;
+    padding: 40px;
+    background: rgba(31, 36, 39, 0.9);
+    text-align: center;
+    border-radius: 24px;
+    color: white;
+}
+
+.yours h1{   
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: #07f5c1;
+}
+
+.yours text, .yours last{ 
+    font-weight: 200;
+    display: block;
+    margin: 10px 0;
+}
+
+.yours h2{ 
+    text-transform: uppercase;
+    margin-top: 20px;
+    color: #07f5c1;
+}
 .pos{    width: 500px;
 padding: 20px;
 position: absolute;
