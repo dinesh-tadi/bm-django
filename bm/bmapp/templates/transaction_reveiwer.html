@@ -12,7 +12,7 @@
         $(document).ready(function(){
             $(".h").on('click', function(){
                 var i = this.id;
-                location.href = "{% url 'proceed' %}".concat(i);    
+                location.href = "{% url 'proceed_transaction' id=0 %}".replace('0', i);    
             });
         });
     </script>

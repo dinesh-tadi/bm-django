@@ -1,0 +1,166 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Loan Application</title>
+    <style>
+        body {
+            background-image: linear-gradient(to right,#ffd89b , #19547b);
+            background-size: cover;
+            background-position: center;
+            font-family: sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .card {
+            background-color: rgba(255, 248, 220, 0.9);
+            border-radius: 0.7em;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f8f9fa;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+        td {
+            font-size: 1em;
+        }
+        .loan-row:hover {
+            background-color: rgba(123, 140, 146, 0.2);
+        }
+        .document-viewer {
+            width: 100%;
+            height: 800px;
+            border: 1px solid #666CCC;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            background-color: white;
+        }
+        .pdf-container {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .form-group {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .btn {
+            min-width: 220px;
+            margin-top: 10px;
+        }
+        .btn-approve {
+            background-color: #28a745;
+            color: white;
+        }
+        .btn-deny {
+            background-color: #dc3545;
+            color: white;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .reason-input {
+            width: 100%;
+            max-width: 500px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h2>Loan Application Details</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Application ID</th>
+                        <th>Account No</th>
+                        <th>Amount</th>
+                        <th>Loan Type</th>
+                        <th>Interest</th>
+                        <th>Date Applied</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for loan in l %}
+                    <tr class="loan-row">
+                        <td>{{ loan.0 }}</td>
+                        <td>{{ loan.6 }}</td>
+                        <td>{{ loan.2 }}</td>
+                        <td>{{ loan.3 }}</td>
+                        <td>{{ loan.4 }}</td>
+                        <td>{{ loan.5 }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>Supporting Documents</h2>
+            {% for loan in l %}
+            <div class="pdf-container">
+                <object data="/media/loan_documents_uploaded/lapp_{{ loan.6 }}.pdf" type="application/pdf" width="100%" height="800px">
+                    <p>
+                        Unable to display PDF.
+                        <a href="/media/loan_documents_uploaded/lapp_{{ loan.6 }}.pdf" target="_blank">Download PDF</a>
+                    </p>
+                </object>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="card">
+            <h2>Review Decision</h2>
+            <div class="action-buttons">
+                <form action="{% url 'process_review' %}" method="post" class="form-group">
+                    {% csrf_token %}
+                    <input type="hidden" name="lid" value="{{ l.0.0 }}">
+                    <input type="hidden" name="accept" value="yes">
+                    <button type="submit" class="btn btn-approve">Approve Application</button>
+                </form>
+                <form action="{% url 'process_review' %}" method="post" class="form-group">
+                    {% csrf_token %}
+                    <input type="hidden" name="lid" value="{{ l.0.0 }}">
+                    <input type="hidden" name="accept" value="no">
+                    <textarea name="reason" class="reason-input" placeholder="Please provide a reason for denial..." required></textarea>
+                    <button type="submit" class="btn btn-deny">Deny Application</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

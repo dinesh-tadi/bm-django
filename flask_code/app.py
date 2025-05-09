@@ -67,13 +67,13 @@ admin_login_pswd='adminpswd'
 # def logindash():
 #     return render_template('login.html')
 
-@app.route('/empdetails.html', methods=['POST', 'GET'])
-def emp_details():
-        curs=mysql.connection.cursor()
-        curs.execute(f"select IFSC,name,Salary,phone_no,email,Address from employee_details where status = 'act';")
-        tr = curs.fetchall()
-        curs.close()
-        return render_template("empdetails.html", t = tr)
+# @app.route('/empdetails.html', methods=['POST', 'GET'])
+# def emp_details():
+#         curs=mysql.connection.cursor()
+#         curs.execute(f"select IFSC,name,Salary,phone_no,email,Address from employee_details where status = 'act';")
+#         tr = curs.fetchall()
+#         curs.close()
+#         return render_template("empdetails.html", t = tr)
 
 # @app.route('/dash.html')
 # def dash():
@@ -100,45 +100,45 @@ def emp_details():
     
 #     return render_template('dash.html',username=user_name[0],acc = ap ,l = loan, inte = interest)    
 
-@app.route('/balance.html') 
-def balance():
-    n = int(session["cid"][3:])
-    curs=mysql.connection.cursor()
-    curs.execute(f"select Account_no from account_details where Cust_ID = {n};")
-    accounts = curs.fetchall()
-    ac = []
-    for a in accounts:
-        p = [str(a[0])[0:3] + "xxxx" + str(a[0])[-3:],a[0]]
-        ac.append(p)
-    return render_template('balance.html' , acc = ac)
+# @app.route('/balance.html') 
+# def balance():
+#     n = int(session["cid"][3:])
+#     curs=mysql.connection.cursor()
+#     curs.execute(f"select Account_no from account_details where Cust_ID = {n};")
+#     accounts = curs.fetchall()
+#     ac = []
+#     for a in accounts:
+#         p = [str(a[0])[0:3] + "xxxx" + str(a[0])[-3:],a[0]]
+#         ac.append(p)
+#     return render_template('balance.html' , acc = ac)
 
-@app.route('/cardlimit.html') #changed
-def cardlimit():
-    n = int(session["cid"][3:])
-    curs=mysql.connection.cursor()
-    curs.execute(f"select Account_no from account_details where Cust_ID = {n};")
-    accounts = curs.fetchall()
-    ac = []
-    for a in accounts:
-        p = [str(a[0])[0:3] + "xxxx" + str(a[0])[-3:],a[0]]
-        ac.append(p)
-    return render_template('cardlimit.html', acc = ac)
+# @app.route('/cardlimit.html') #changed
+# def cardlimit():
+#     n = int(session["cid"][3:])
+#     curs=mysql.connection.cursor()
+#     curs.execute(f"select Account_no from account_details where Cust_ID = {n};")
+#     accounts = curs.fetchall()
+#     ac = []
+#     for a in accounts:
+#         p = [str(a[0])[0:3] + "xxxx" + str(a[0])[-3:],a[0]]
+#         ac.append(p)
+#     return render_template('cardlimit.html', acc = ac)
 
 @app.route('/casher.html')
 def casher():
     return render_template('casher.html')
 
-@app.route('/changepassword.html')
-def changepassword():
-    n = int(session["cid"][3:])
-    curs=mysql.connection.cursor()
-    curs.execute(f"select Account_no from account_details where Cust_ID = {n};")
-    accounts = curs.fetchall()
-    ac = []
-    for a in accounts:
-        p = [str(a[0])[0:3] + "xxxx" + str(a[0])[-3:],a[0]]
-        ac.append(p)
-    return render_template('changepassword.html', acc = ac)
+# @app.route('/changepassword.html')
+# def changepassword():
+#     n = int(session["cid"][3:])
+#     curs=mysql.connection.cursor()
+#     curs.execute(f"select Account_no from account_details where Cust_ID = {n};")
+#     accounts = curs.fetchall()
+#     ac = []
+#     for a in accounts:
+#         p = [str(a[0])[0:3] + "xxxx" + str(a[0])[-3:],a[0]]
+#         ac.append(p)
+#     return render_template('changepassword.html', acc = ac)
 
 @app.route('/cheque.html')
 def cheque():
@@ -208,9 +208,9 @@ def trans():
         ac.append(p)
     return render_template('trans.html', acc = ac)
 
-@app.route('/addemployee.html')
-def addemployee():
-    return render_template('addemployee.html')
+# @app.route('/addemployee.html')
+# def addemployee():
+#     return render_template('addemployee.html')
 
 @app.route('/cashierdash.html')
 def cashierdash():
@@ -260,63 +260,63 @@ def WINreqcredit():
 def WINtransaction():
     return render_template('WINtransaction.html')
 
-@app.route('/dashadmin.html')
-def dashadmin():
-    curs=mysql.connection.cursor()
-    n = int(session["cid"][3:])
-    curs.execute(f"select Name from employee_details where Employee_ID = {n};")
-    user_name = curs.fetchone()
-    curs=mysql.connection.cursor()
-    curs.execute(f"select SUM(Bank_balance) from account_details;")
-    totalsum=curs.fetchone()
-    curs=mysql.connection.cursor()
-    curs.execute(f"select SUM(Amount_remain) from loan_active;")
-    totalloan=curs.fetchone()
-    return render_template('dashadmin.html',username=user_name[0],totalsum=totalsum[0],totalloan=totalloan[0],interest=interest)
+# @app.route('/dashadmin.html')
+# def dashadmin():
+#     curs=mysql.connection.cursor()
+#     n = int(session["cid"][3:])
+#     curs.execute(f"select Name from employee_details where Employee_ID = {n};")
+#     user_name = curs.fetchone()
+#     curs=mysql.connection.cursor()
+#     curs.execute(f"select SUM(Bank_balance) from account_details;")
+#     totalsum=curs.fetchone()
+#     curs=mysql.connection.cursor()
+#     curs.execute(f"select SUM(Amount_remain) from loan_active;")
+#     totalloan=curs.fetchone()
+#     return render_template('dashadmin.html',username=user_name[0],totalsum=totalsum[0],totalloan=totalloan[0],interest=interest)
 
-@app.route('/editemploy.html')
-def editemploy():
-    curs=mysql.connection.cursor()
-    curs.execute(f"select employee_id,title,name,IFSC,phone_no,address,email,salary,date_of_birth from employee_details where status = 'act'")
-    emp = curs.fetchall()
-    curs.close()
-    lis = []
-    l1 = []
-    l2 = []
-    l3 = []
-    l4 = []
-    l5 = []
-    l6  = []
-    i = 0
-    for l in emp:
-        id = l[1] + "%04d" %l[0]
-        d = {'id':id, 'text':id, 'num':i}
-        i = i+1
-        lis.append(d)
-        l1.append(l[2])
-        l2.append(l[3])
-        l3.append(l[4])
-        l4.append(l[5])
-        l5.append(l[6])
-        l6.append(l[7])
-    return render_template('editemploy.html', emp = lis, l1 = l1,l2 = l2,l3=l3,l4=l4,l5=l5,l6=l6)
+# @app.route('/editemploy.html')
+# def editemploy():
+#     curs=mysql.connection.cursor()
+#     curs.execute(f"select employee_id,title,name,IFSC,phone_no,address,email,salary,date_of_birth from employee_details where status = 'act'")
+#     emp = curs.fetchall()
+#     curs.close()
+#     lis = []
+#     l1 = []
+#     l2 = []
+#     l3 = []
+#     l4 = []
+#     l5 = []
+#     l6  = []
+#     i = 0
+#     for l in emp:
+#         id = l[1] + "%04d" %l[0]
+#         d = {'id':id, 'text':id, 'num':i}
+#         i = i+1
+#         lis.append(d)
+#         l1.append(l[2])
+#         l2.append(l[3])
+#         l3.append(l[4])
+#         l4.append(l[5])
+#         l5.append(l[6])
+#         l6.append(l[7])
+#     return render_template('editemploy.html', emp = lis, l1 = l1,l2 = l2,l3=l3,l4=l4,l5=l5,l6=l6)
 
-@app.route('/intrestrates.html')
-def intrestrates():
-    return render_template('intrestrates.html',interest=interest)
+# @app.route('/intrestrates.html')
+# def intrestrates():
+#     return render_template('intrestrates.html',interest=interest)
 
-@app.route('/rmvemp.html')
-def rmvemp():
-    curs=mysql.connection.cursor()
-    curs.execute(f"select employee_id,title from employee_details where status = 'act'")
-    emp = curs.fetchall()
-    lis = []
-    for l in emp:
-        id = l[1] + "%04d" %l[0]
-        print(id)
-        lis.append(id)
-    curs.close()
-    return render_template('rmvemp.html', emp = lis)
+# @app.route('/rmvemp.html')
+# def rmvemp():
+#     curs=mysql.connection.cursor()
+#     curs.execute(f"select employee_id,title from employee_details where status = 'act'")
+#     emp = curs.fetchall()
+#     lis = []
+#     for l in emp:
+#         id = l[1] + "%04d" %l[0]
+#         print(id)
+#         lis.append(id)
+#     curs.close()
+#     return render_template('rmvemp.html', emp = lis)
 
 # @app.route('/registering', methods=['POST', 'GET'])
 # def registering():
@@ -477,22 +477,22 @@ def rmvemp():
 #         curs.connection.commit()
 #         return render_template('success.html')
 
-@app.route('/applychequebook', methods=['POST', 'GET'])
-def applychequebook():
-    if request.method == 'POST':
-        a=request.form['account_number']
-        holder_name=request.form['holder_name']
-        address=request.form['address']
-        phone_number=request.form['phone_number']
-        t = date.today()
-        date1 = str(t.day) +"/"+ str(t.month)+"/" + str(t.year)
-        curs=mysql.connection.cursor()
-        curs.execute(f"SELECT IFSC_CODE FROM customer_details where cust_id = (SELECT cust_id from account_details where account_no = {a});")
-        s = curs.fetchone()
-        ifsc = s[0]
-        curs.execute(f"INSERT INTO application(Account_no, IFSC, date_applied, time_applied, applied_for, address) VALUES('{a}','{ifsc}','{date1}','{times()}','chequebook','{address}');")
-        curs.connection.commit()
-        return render_template('success.html')
+# @app.route('/applychequebook', methods=['POST', 'GET'])
+# def applychequebook():
+#     if request.method == 'POST':
+#         a=request.form['account_number']
+#         holder_name=request.form['holder_name']
+#         address=request.form['address']
+#         phone_number=request.form['phone_number']
+#         t = date.today()
+#         date1 = str(t.day) +"/"+ str(t.month)+"/" + str(t.year)
+#         curs=mysql.connection.cursor()
+#         curs.execute(f"SELECT IFSC_CODE FROM customer_details where cust_id = (SELECT cust_id from account_details where account_no = {a});")
+#         s = curs.fetchone()
+#         ifsc = s[0]
+#         curs.execute(f"INSERT INTO application(Account_no, IFSC, date_applied, time_applied, applied_for, address) VALUES('{a}','{ifsc}','{date1}','{times()}','chequebook','{address}');")
+#         curs.connection.commit()
+#         return render_template('success.html')
 
 @app.route('/fixed_deposit', methods=['POST', 'GET'])
 def fixed_deposit():
@@ -656,13 +656,13 @@ def cust_feedback():
 #     session.pop("cid",None)
 #     return redirect(url_for("logindash"))
 
-@app.route('/empdetails.html', methods=['POST', 'GET'])
-def empdetails():
-        curs=mysql.connection.cursor()
-        curs.execute(f"select IFSC,name,Salary,phone_no,email,Address from employee_details where status = 'act';")
-        tr = curs.fetchall()
-        curs.close()
-        return render_template("empdetails.html", t = tr)
+# @app.route('/empdetails.html', methods=['POST', 'GET'])
+# def empdetails():
+#         curs=mysql.connection.cursor()
+#         curs.execute(f"select IFSC,name,Salary,phone_no,email,Address from employee_details where status = 'act';")
+#         tr = curs.fetchall()
+#         curs.close()
+#         return render_template("empdetails.html", t = tr)
 
 # @app.route('/newaccount', methods=['POST', 'GET'])
 # def newaccount():
@@ -765,25 +765,25 @@ def transac():
             msg = "Wrong Password!"
             return render_template("msg.html", msg = msg)
 
-@app.route('/add_employee', methods=['POST', 'GET'])
-def add_employee():
-    if request.method == 'POST':
-        employee_name=request.form['employee_name']
-        branch_name=request.form['branch_name']
-        title = request.form['role']
-        IFSC=request.form['IFSC']
-        DOB=request.form['DOB']
-        DOJ=request.form['date_of_join']
-        phone=request.form['phone_number']
-        address=request.form['address']
-        email_id=request.form['email_id']
-        salary=request.form['salary']
-        curs=mysql.connection.cursor()
-        date1 = str(date.today())
-        curs.execute(f'''INSERT INTO employee_details(name,Title, Branch_address, IFSC, password, date_of_birth, phone_no, Address, email, Salary, date_joined) VALUES('{employee_name}','{title}',"{branch_name}","{IFSC}","{phone}","{DOB}","{phone}","{address}",'{email_id}',{float(salary)}, '{DOJ}');''')
-        mysql.connection.commit()
-        curs.close()
-        return render_template('success.html')
+# @app.route('/add_employee', methods=['POST', 'GET'])
+# def add_employee():
+#     if request.method == 'POST':
+#         employee_name=request.form['employee_name']
+#         branch_name=request.form['branch_name']
+#         title = request.form['role']
+#         IFSC=request.form['IFSC']
+#         DOB=request.form['DOB']
+#         DOJ=request.form['date_of_join']
+#         phone=request.form['phone_number']
+#         address=request.form['address']
+#         email_id=request.form['email_id']
+#         salary=request.form['salary']
+#         curs=mysql.connection.cursor()
+#         date1 = str(date.today())
+#         curs.execute(f'''INSERT INTO employee_details(name,Title, Branch_address, IFSC, password, date_of_birth, phone_no, Address, email, Salary, date_joined) VALUES('{employee_name}','{title}',"{branch_name}","{IFSC}","{phone}","{DOB}","{phone}","{address}",'{email_id}',{float(salary)}, '{DOJ}');''')
+#         mysql.connection.commit()
+#         curs.close()
+#         return render_template('success.html')
 
 @app.route('/cashier_dash', methods=['POST', 'GET'])
 def cashier_dash():
@@ -918,64 +918,64 @@ def ch_pswd():
 #         curs.close()
 #         return render_template('success.html')
 
-@app.route('/dashadminsalaries', methods=['POST', 'GET'])
-def dashadminsalaries():
-    if request.method == 'POST':
-        IFSC=request.form['IFSC']
-        curs=mysql.connection.cursor()
-        curs.execute("")
-        dbrecords = curs.fetchall()
-        curs.close()
-        dbrecords = list(set(dbrecords))
-        return render_template('success.html')
+# @app.route('/dashadminsalaries', methods=['POST', 'GET'])
+# def dashadminsalaries():
+#     if request.method == 'POST':
+#         IFSC=request.form['IFSC']
+#         curs=mysql.connection.cursor()
+#         curs.execute("")
+#         dbrecords = curs.fetchall()
+#         curs.close()
+#         dbrecords = list(set(dbrecords))
+#         return render_template('success.html')
 
-@app.route('/edit_employee', methods=['POST', 'GET'])
-def edit_employee():
-    if request.method == 'POST':
-        employee_id=request.form['employee_id']
-        employee_name=request.form['employee_name']
-        IFSC=request.form['IFSC']
-        phone_number=request.form['phone_number']
-        address=request.form['address']
-        email_id=request.form['email_id']
-        salary=request.form['salary']
-        emp = int(employee_id[3:])
-        curs=mysql.connection.cursor()
-        curs.execute(f"UPDATE EMPLOYEE_DETAILS SET name ='{employee_name}',IFSC ='{IFSC}',phone_no = '{phone_number}',address='{address}', email='{email_id}',salary ={salary} WHERE employee_id={emp} ;")
-        curs.connection.commit()
-        curs.close()
-        return render_template('success.html')
+# @app.route('/edit_employee', methods=['POST', 'GET'])
+# def edit_employee():
+#     if request.method == 'POST':
+#         employee_id=request.form['employee_id']
+#         employee_name=request.form['employee_name']
+#         IFSC=request.form['IFSC']
+#         phone_number=request.form['phone_number']
+#         address=request.form['address']
+#         email_id=request.form['email_id']
+#         salary=request.form['salary']
+#         emp = int(employee_id[3:])
+#         curs=mysql.connection.cursor()
+#         curs.execute(f"UPDATE EMPLOYEE_DETAILS SET name ='{employee_name}',IFSC ='{IFSC}',phone_no = '{phone_number}',address='{address}', email='{email_id}',salary ={salary} WHERE employee_id={emp} ;")
+#         curs.connection.commit()
+#         curs.close()
+#         return render_template('success.html')
 
-@app.route('/interest_rates', methods=['POST', 'GET'])
-def interest_rates():
-    if request.method == 'POST':
-        gold_interest_rate=request.form['gold_interest_rate']
-        edu_interest_rate=request.form['edu_interest_rate']
-        personal_loan_interest_rate=request.form['personal_loan_interest_rate']
-        FD_interest_rate=request.form['FD_interest_rate']
-        interest['education']=edu_interest_rate
-        interest['FD']=FD_interest_rate
-        interest['gold']=gold_interest_rate
-        interest['personal']=personal_loan_interest_rate
-        return render_template('success.html')
+# @app.route('/interest_rates', methods=['POST', 'GET'])
+# def interest_rates():
+#     if request.method == 'POST':
+#         gold_interest_rate=request.form['gold_interest_rate']
+#         edu_interest_rate=request.form['edu_interest_rate']
+#         personal_loan_interest_rate=request.form['personal_loan_interest_rate']
+#         FD_interest_rate=request.form['FD_interest_rate']
+#         interest['education']=edu_interest_rate
+#         interest['FD']=FD_interest_rate
+#         interest['gold']=gold_interest_rate
+#         interest['personal']=personal_loan_interest_rate
+#         return render_template('success.html')
 
-@app.route('/rmv_emp', methods=['POST', 'GET'])
-def rmv_emp():
-    if request.method == 'POST':
-        empl=request.form['employee_user_id']
-        admin_privacy_key=request.form['admin_privacy_key']
-        curs=mysql.connection.cursor()
-        eid = int(session["cid"][3:])
-        curs.execute(f"select password from employee_details where employee_id = {eid};")
-        psw=curs.fetchone()[0]
-        if admin_privacy_key == psw:
-            emp = int(empl[3:])
-            curs=mysql.connection.cursor()
-            curs.execute(f"UPDATE employee_details set status = 'freeze' where employee_id = {emp}")
-            curs.connection.commit()
-            curs.close()
-            return render_template('success.html')
-        return render_template("msg.html", msg = "FAILURE")
+# @app.route('/rmv_emp', methods=['POST', 'GET'])
+# def rmv_emp():
+#     if request.method == 'POST':
+#         empl=request.form['employee_user_id']
+#         admin_privacy_key=request.form['admin_privacy_key']
+#         curs=mysql.connection.cursor()
+#         eid = int(session["cid"][3:])
+#         curs.execute(f"select password from employee_details where employee_id = {eid};")
+#         psw=curs.fetchone()[0]
+#         if admin_privacy_key == psw:
+#             emp = int(empl[3:])
+#             curs=mysql.connection.cursor()
+#             curs.execute(f"UPDATE employee_details set status = 'freeze' where employee_id = {emp}")
+#             curs.connection.commit()
+#             curs.close()
+#             return render_template('success.html')
+#         return render_template("msg.html", msg = "FAILURE")
 
 @app.route('/money', methods=['POST', 'GET'])
 def money():

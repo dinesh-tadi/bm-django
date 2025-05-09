@@ -10,9 +10,9 @@
     <script src="https://kit.fontawesome.com/c5ad6c7381.js" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function(){
-            $(".h").on('click', function(){
-                var i = this.id;
-                location.href = "{% url 'review' %}".concat(i);    
+            $(".review-btn").on('click', function(){
+                var appId = $(this).data('app-id');
+                location.href = "{% url 'review_loan' id=0 %}".replace('0', appId);    
             });
         });
     </script>
@@ -97,8 +97,26 @@
         td {
             font-size: 1.1em;
         }
-        .h:hover {
+        .loan-row:hover {
             background-color: rgba(123, 140, 146, 0.582);
+        }
+        .review-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .review-btn:hover {
+            background-color: #45a049;
+        }
+        .no-loans {
+            text-align: center;
+            padding: 20px;
+            font-size: 1.2em;
+            color: #666;
         }
     </style>
 </head>
@@ -128,25 +146,35 @@
             <table>
                 <thead>
                     <tr>
-                        <th>App_ID</th>
-                        <th>Account_No</th>
-                        <th>Loan_Amount</th>
-                        <th>Loan_type</th>
-                        <th>Loan_interest</th>
-                        <th>Date_applied</th>
+                        <th>Application ID</th>
+                        <th>Account No</th>
+                        <th>Amount</th>
+                        <th>Loan Type</th>
+                        <th>Interest</th>
+                        <th>Date Applied</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for loan in l %}
-                        <tr class="h" id="{{ loan.0 }}">
-                            <td>{{ loan.0 }}</td>
-                            <td>{{ loan.1 }}</td>
-                            <td>{{ loan.2 }}</td>
-                            <td>{{ loan.3 }}</td>
-                            <td>{{ loan.4 }}</td>
-                            <td>{{ loan.5 }}</td>
+                    {% if l %}
+                        {% for loan in l %}
+                            <tr class="loan-row">
+                                <td>{{ loan.0 }}</td>
+                                <td>{{ loan.1 }}</td>
+                                <td>{{ loan.2 }}</td>
+                                <td>{{ loan.3 }}</td>
+                                <td>{{ loan.4 }}</td>
+                                <td>{{ loan.5 }}</td>
+                                <td>
+                                    <button class="review-btn" data-app-id="{{ loan.0 }}">Review</button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="7" class="no-loans">No loan applications to review</td>
                         </tr>
-                    {% endfor %}
+                    {% endif %}
                 </tbody>
             </table>
         </div>

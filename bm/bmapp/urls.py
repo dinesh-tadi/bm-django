@@ -39,4 +39,14 @@ urlpatterns = [
     path('edit_employee/', views.edit_employee, name='edit_employee'),
     path('interest_rates/', views.interest_rates, name='interest_rates'),
     path('rmv_emp/', views.rmv_emp, name='rmv_emp'),
+    path('proceed/<str:id>/', views.proceed_transaction, name='proceed_transaction'),
+    path('reply_view/<str:id>/', views.reply_view, name='reply_view'),
+    path('replied_view/', views.replied_view, name='replied_view'),
+    # Customer Executive URLs
+    path('cust-executive/', views.cust_executive, name='cust_executive'),
+    # Loan Review URLs
+    path('review/<str:id>/', views.review_loan, name='review_loan'),
+    path('process-review/', views.process_review, name='process_review'),
+    # Banker URLs
+    path('banker/', views.banker, name='banker'),
 ] 
