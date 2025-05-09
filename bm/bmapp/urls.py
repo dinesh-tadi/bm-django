@@ -13,7 +13,7 @@ urlpatterns = [
     path('change-password/', views.change_password, name='change_password'),
     path('card-limit/', views.card_limit, name='card_limit'),
     path('loan-apply/', views.loan_apply, name='loan_apply'),
-    path('feedback/', views.feedback, name='feedback'),
+    path('feedback/', views.cust_feedback, name='cust_feedback'),
     path('contact/', views.contact, name='contact'),
     path('logout/', views.logout, name='logout'),
     # Registration related URLs
